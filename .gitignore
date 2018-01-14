@@ -1,22 +1,133 @@
-# Compiled class file
-*.class
+from sense_hat import SenseHat
 
-# Log file
-*.log
+sense = SenseHat()
 
-# BlueJ files
-*.ctxt
+b = (0, 0, 255)
+w = (255, 255, 255)
+r = (255, 0, 0)
+y = (255, 255, 0)
+g = (0, 255, 0)
+k = (0, 0, 0)
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+American = [
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+ w,b,w,r,r,r,r,r,
+ b,w,b,w,w,w,w,w,
+ w,b,w,r,r,r,r,r,
+ w,w,w,w,w,w,w,w,
+ r,r,r,r,r,r,r,r,
+ w,w,w,w,w,w,w,w,
+ r,r,r,r,r,r,r,r,
+ w,w,w,w,w,w,w,w,
+ ]
+
+image = [
+
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ w,w,w,w,w,w,w,w,
+ ]
+
+Swedish = [
+b,b,y,y,b,b,b,b,
+b,b,y,y,b,b,b,b,
+b,b,y,y,b,b,b,b,
+y,y,y,y,y,y,y,y,
+y,y,y,y,y,y,y,y,
+b,b,y,y,b,b,b,b,
+b,b,y,y,b,b,b,b,
+b,b,y,y,b,b,b,b
+]
+
+French = [
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r,
+b,b,b,w,w,r,r,r
+]
+
+Scottish = [
+w,b,b,b,b,b,b,w,
+b,w,b,b,b,b,w,b,
+b,b,w,b,b,w,b,b,
+b,b,b,w,w,b,b,b,
+b,b,b,w,w,b,b,b,
+b,b,w,b,b,w,b,b,
+b,w,b,b,b,b,w,b,
+w,b,b,b,b,b,b,w
+]
+
+Japanese = [
+w,w,w,w,w,w,w,w,
+w,w,w,w,w,w,w,w,
+w,w,w,r,r,w,w,w,
+w,w,r,r,r,r,w,w,
+w,r,r,r,r,r,r,w,
+w,w,r,r,r,r,w,w,
+w,w,w,r,r,w,w,w,
+w,w,w,w,w,w,w,w,
+]
+
+Jamaican = [
+g,g,g,g,g,g,g,g,
+y,g,g,g,g,g,g,y,
+k,y,g,g,g,g,y,k,
+k,k,y,g,g,y,k,k,
+k,k,k,y,y,k,k,k,
+k,k,y,g,g,y,k,k,
+k,y,g,g,g,g,y,k,
+y,g,g,g,g,g,g,y,
+]
+
+Italy = [
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+g,g,g,w,w,r,r,r,
+]
+ 
+
+while True:
+    orientation = sense.get_orientation()
+    pitch = orientation['pitch']
+    roll = orientation['roll']
+    yaw = orientation['yaw']
+    print("pitch={0}, roll={1}, yaw={2}".format(pitch, roll, yaw))
+
+    if roll < 5:
+        sense.set_pixels(image)
+        
+    if  20 > roll > 5:
+        sense.set_pixels(American)
+
+    if 30 > roll > 20:
+        sense.set_pixels(Swedish)
+
+    if 40 > roll > 30:
+        sense.set_pixels(French)
+
+    if 50 > roll > 40:
+        sense.set_pixels(Scottish)
+
+    if 65 > roll > 50:
+        sense.set_pixels(Japanese)
+
+    if 80 > roll > 65:
+        sense.set_pixels(Jamaican)
+
+    if roll > 80:
+        sense.set_pixels(Italy)
